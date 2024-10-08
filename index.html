@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosphere - Composing Unique Melodies for Every Scenario</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- 添加图标链接 -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- 内联样式保持不变 -->
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="Jump Around（1）.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="musicToggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">🔇</button>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#home">
+                    <img src="images/mosphere-logo.png" alt="Mosphere Logo">
+                </a>
+            </div>
+            <div class="header-quote">
+                <p>"Music is the universal language of mankind." - Henry Wadsworth Longfellow</p>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#ai-assistant">AI Assistant</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Mosphere — Composing Unique Melodies for Every Scenario</h1>
+                    <p>Mosphere is an innovative music generation software that automatically creates atmosphere-fitting music for different scenarios, filling your life with dynamic melodies.</p>
+                    <!-- 移除了这里的 blockquote -->
+                    <a href="#features" class="cta-button">Learn More</a>
+                    
+                    <!-- 添加 AI 播放器 -->
+                    <div class="ai-player">
+                        <h3>Experience AI-Generated Music</h3>
+                        <div class="player-controls">
+                            <button id="generateBtn">Generate New Track</button>
+                            <button id="playPauseBtn">Play</button>
+                        </div>
+                        <div class="player-info">
+                            <span id="trackInfo">No track generated yet</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI 助手对话框部分 -->
+        <section id="ai-assistant" style="padding-top: 4rem; padding-bottom: 4rem;">
+            <h2>Chat with Mosphere AI Assistant</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Chat messages will be dynamically added here -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Enter your question...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 其他部分保持不变，只需将"墨斯菲尔"替换为"Mosphere" -->
+        
+        <section id="about">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <p>We are a team of musicians and artificial intelligence experts based in Shanghai, China. We are trying to change the world with Mosphere.</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us Anytime, We're Here for You</h2>
+            <form class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+            <div class="contact-info">
+                <p>Email: zhuounuo@gmail.com</p>
+                <p>Phone: +86 19101701777</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2023 Mosphere. All rights reserved.</p>
+        </div>
+        <div class="social-links">
+            <a href="#" target="_blank"><img src="images/mosphere-logo.png" alt="Weibo"></a>
+            <a href="#" target="_blank"><img src="images/mosphere-logo.png" alt="WeChat"></a>
+            <a href="#" target="_blank"><img src="images/mosphere-logo.png" alt="TikTok"></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- JavaScript 代码 -->
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if (userInput.value.trim() !== '') {
+                // Add user message
+                chatMessages.innerHTML += `<p><strong>You:</strong> ${userInput.value}</p>`;
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    chatMessages.innerHTML += `<p><strong>Mosphere AI:</strong> Thank you for your question! I'm the Mosphere AI assistant, happy to help you. Feel free to ask me anything about Mosphere.</p>`;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+                
+                userInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        // Allow users to send messages by pressing Enter
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // 模拟 AI 生成音乐的函数
+        function generateAIMusic() {
+            // 这里应该是调用实际的 AI 音乐生成 API
+            // 现在我们只是模拟这个过程
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        title: "AI Generated Track #" + Math.floor(Math.random() * 1000),
+                        duration: Math.floor(Math.random() * 180) + 60 // 60 to 240 seconds
+                    });
+                }, 2000); // 模拟 2 秒的生成时间
+            });
+        }
+
+        // 获取元素
+        const generateBtn = document.getElementById('generateBtn');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const trackInfo = document.getElementById('trackInfo');
+
+        let currentTrack = null;
+        let isPlaying = false;
+
+        // 生成新曲目
+        generateBtn.addEventListener('click', async () => {
+            generateBtn.disabled = true;
+            generateBtn.textContent = 'Generating...';
+            trackInfo.textContent = 'Generating new track...';
+
+            try {
+                currentTrack = await generateAIMusic();
+                trackInfo.textContent = `${currentTrack.title} (${currentTrack.duration}s)`;
+                playPauseBtn.disabled = false;
+            } catch (error) {
+                trackInfo.textContent = 'Error generating track. Please try again.';
+            }
+
+            generateBtn.disabled = false;
+            generateBtn.textContent = 'Generate New Track';
+        });
+
+        // 播放/暂停
+        playPauseBtn.addEventListener('click', () => {
+            if (!currentTrack) return;
+
+            isPlaying = !isPlaying;
+            playPauseBtn.textContent = isPlaying ? 'Pause' : 'Play';
+            
+            if (isPlaying) {
+                trackInfo.textContent = `Playing: ${currentTrack.title}`;
+            } else {
+                trackInfo.textContent = `Paused: ${currentTrack.title}`;
+            }
+        });
+
+        // 初始状态
+        playPauseBtn.disabled = true;
+    </script>
+</body>
+</html>
